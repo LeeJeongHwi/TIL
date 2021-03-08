@@ -11,14 +11,6 @@
 * Android Studio 4.1.1
 * Jdk 1.8
 
-
-
-### Document
-
-
-
-
-
 ### Referneces
 
 [The 친절한 코틀린 앱 프로그래밍 Youtube](https://www.youtube.com/watch?v=SEPgoMZut6s&feature=emb_title)
