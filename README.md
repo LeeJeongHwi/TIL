@@ -19,11 +19,9 @@ Record of *Today I Learn*
 
 
 
-### Docs
+## Docs
 
-
-
-#### android
+### android
 
 [Tutorial](https://github.com/LeeJeongHwi/TIL/blob/main/android/docs/Tutorial.md)
 
