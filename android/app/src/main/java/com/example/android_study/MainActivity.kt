@@ -5,20 +5,39 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     /*num1,num2,num3,num4,num5, calcButton , resultView */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        calcButton.setOnClickListener {
-
-            val num_1 = if (num1.text.toString() == "") 0 else num1.text.toString().toInt()
-            val num_2 = if (num2.text.toString() == "") 0 else num2.text.toString().toInt()
-            val num_3 = if (num3.text.toString() == "") 0 else num3.text.toString().toInt()
-            val num_4 = if (num4.text.toString() == "") 0 else num4.text.toString().toInt()
-            val num_5 = if (num5.text.toString() == "") 0 else num5.text.toString().toInt()
-            val result:Int = num_1+num_2+num_3+num_4+num_5
-            resultView.setText("결과 : "+result.toString())
+        button1.setOnClickListener {
+            val addFunc = {a:Int, b:Int -> a+b}
+            val result= addFunc(10,10)
+            resultView.setText("결과 : ${result}")
+        }
+        button2.setOnClickListener {
+            val addFunc = {a:Int, b:Int -> a+b}
+            val result = calc(10,11,addFunc)
+            resultView.setText("결과 : ${result}")
+        }
+        button3.setOnClickListener {
+            val oper = getOperator("subtract")
+            if (oper!=null){
+                val result = calc(30,19,oper)
+                resultView.setText("결과 : ${result}")
+            }
         }
     }
+    fun getOperator(name:String) : ((Int, Int)-> Int)? {
+        var oper:((Int, Int)-> Int)?= null
+        if (name == "add"){
+            oper = {a,b-> a+b}
+        }
+        else if (name == "subtract"){
+            oper = {a,b -> a-b}
+        }
+        return oper
+    }
+    fun calc(first:Int, second:Int, oper:(Int,Int)->Int):Int {
+        return oper(first,second)
+    }  
 }
