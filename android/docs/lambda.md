@@ -127,9 +127,80 @@ fun getOperator(name:String) : ((Int, Int)-> Int)? {
 
 `oper`의 변수는 `((Int,Int) -> Int)?` 로 인자 파라미터의 타입을 결정한다.
 
+> Kotlin 의 void 함수는 `Unit` 자료형으로 사용한다.
 
 
-### 다양한 형태
+
+### 익명함수와 인라인 함수
+
+람다식에서는 `return, break, continue` 와 같은 제어문을 처리하기 쉽지 않음
+
+따라서 제어문 처리를 위한 익명함수를 사용함
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button4.setOnClickListener {
+            val sum = fun(a: Int, b: Int): Int {
+                var result = 0
+                result = a + b
+                return result
+            }
+            val output2 = sum(10, 20)
+            resultView.setText("결과 : ${output2}")
+
+            doAction(fun(): Int {
+                println("액션 수행")
+                return 10
+            })
+            doAction{
+                println("액션 수행2")
+                10
+            }
+            doAction{
+                println("액션 수행3")
+                return@doAction 10
+            }
+        }
+    }
+    fun doAction(action:() -> Int){
+        println("do Action 수행")
+        val result = action()
+        println("do Action 호출 종료 : ${result}")
+    }
+```
+
+* 익명함수
+
+  ```kotlin
+  val sum = fun(a: Int, b:Int): Int{
+      ...
+  }
+  ```
+
+  * 다음과 같이 사용된다.
+
+`doAction` 코드를 살펴보면, 람다식은 `return`키워드를 그냥 사용할 수 없어서 반환 값을 `return `키워드 없이 사용이 가능하다. 
+
+>  액션수행 2이 예와 같다.
+
+`return` 키워드를 사용하고 싶다면 **액션수행3** 과 같이 `return@[Label]` 로 쓴다.
+
+이와 같이 사용하면 람다식만 종료 가능
+
+
+
+**인라인 함수**
+
+* 함수를 정의한 후 그 함수를 반복적으로 호출하면 코드를 구성하는 효율성은 높아지지만 성능은 떨어짐, 해당 함수를 호출할 때 그 함수의 코드가 호출하는 쪽에 복사되어 실행되는 것이 `inline` 함수 --> 성능개선 
+
+```kotlin
+inline fun ~~~
+```
+
+
 
 
 
